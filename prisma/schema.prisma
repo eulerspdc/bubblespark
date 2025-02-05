@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String           @id @default(uuid())
+  email           String           @unique
+  name            String?
+  youtubeAccounts YoutubeAccount[]
+  campaigns       FunnelCampaign[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model YoutubeAccount {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  channelId String           @unique
+  campaigns FunnelCampaign[]
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+}
+
+model FunnelCampaign {
+  id                 String          @id @default(uuid())
+  youtubeAccountId   String?
+  youtubeAccount     YoutubeAccount? @relation(fields: [youtubeAccountId], references: [id], onDelete: Cascade)
+  funnelName         String
+  videoUrl           String?
+  description        String?
+  slug               String          @unique
+  expiresAt          DateTime?
+  campaignLinkUrl    String?
+  campaignLinkActive Boolean         @default(false)
+  isPublished        Boolean         @default(false)
+  leads              Lead[]
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  User               User?           @relation(fields: [userId], references: [id])
+  userId             String?
+  totalCost          Float?
+
+  @@index([slug])
+  @@map("funnel_campaign")
+}
+
+model Lead {
+  id               String           @id @default(uuid())
+  campaignId       String
+  campaign         FunnelCampaign   @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  email            String           @unique
+  name             String
+  phone            String           @unique
+  browser          String
+  platform         String
+  source           String
+  conversionStatus ConversionStatus @default(PENDING)
+  accessedAt       DateTime         @default(now())
+  createdAt        DateTime         @default(now())
+  nextFollowUp     DateTime         @default(now())
+}
+
+enum ConversionStatus {
+  EMAIL_SENT
+  PENDING
+  CONVERTED
+  REJECTED
+}
