@@ -36,8 +36,8 @@ export async function createLinkTree(values: z.infer<typeof linkTreeSchema>) {
     },
   })
 
-  revalidatePath("/links")
-  redirect("/links")
+  revalidatePath("/linktree")
+  redirect("/linktree")
 }
 
 export async function updateLinkTree(id: string, values: z.infer<typeof linkTreeSchema>) {
@@ -55,9 +55,9 @@ export async function updateLinkTree(id: string, values: z.infer<typeof linkTree
     },
   })
 
-  revalidatePath(`/links/${id}`)
-  revalidatePath("/links")
-  redirect(`/links/${id}`)
+  revalidatePath(`/linktree/${id}`)
+  revalidatePath("/linktree")
+  redirect(`/linktree/${id}`)
 }
 
 export async function deleteLinkTree(id: string) {
@@ -67,7 +67,7 @@ export async function deleteLinkTree(id: string) {
     },
   })
 
-  revalidatePath("/links")
-  redirect("/links")
+  revalidatePath("/linktree")
+  redirect("/linktree")
 }
 

@@ -110,11 +110,11 @@ export function LinkTreeCard({ linkTree, isDetailed = false }: LinkTreeCardProps
         {isDetailed ? (
           <>
             <Button variant="outline" asChild>
-              <Link href="/links">Back to List</Link>
+              <Link href="/linktree">Back to List</Link>
             </Button>
             <div className="flex space-x-2">
               <Button variant="outline" asChild>
-                <Link href={`/links/${linkTree.id}/edit`}>
+                <Link href={`/linktree/${linkTree.id}/edit`}>
                   <Edit className="mr-2 h-4 w-4" />
                   Edit
                 </Link>
@@ -128,11 +128,11 @@ export function LinkTreeCard({ linkTree, isDetailed = false }: LinkTreeCardProps
         ) : (
           <>
             <Button variant="outline" asChild>
-              <Link href={`/links/${linkTree.id}`}>View Details</Link>
+              <Link href={`/linktree/${linkTree.id}`}>View Details</Link>
             </Button>
             <div className="flex space-x-2">
               <Button variant="outline" size="icon" asChild>
-                <Link href={`/links/${linkTree.id}/edit`}>
+                <Link href={`/linktree/${linkTree.id}/edit`}>
                   <Edit className="h-4 w-4" />
                 </Link>
               </Button>

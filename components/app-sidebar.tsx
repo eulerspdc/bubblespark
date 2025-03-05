@@ -13,6 +13,7 @@ import {
   Settings2,
   SquareTerminal,
   Filter,
+  LinkIcon
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -154,6 +155,11 @@ const data = {
       name: "Leads",
       url: "/leads",
       icon: PieChart,
+    },
+    {
+      name: "Links",
+      url: "/linktree",
+      icon: LinkIcon,
     },
    
   ],
