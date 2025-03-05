@@ -1,0 +1,60 @@
+// prisma/schema.prisma
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql" // ou o banco de dados que você preferir
+    url      = env("DATABASE_URL")
+}
+
+model PromoProduto {
+    id          Int          @id @default(autoincrement())
+    nome        String
+    descricao   String
+    preco       Float
+    camposInput CampoInput[]
+    botoes      BotaoPromo[]
+    campanha    Campanha?    @relation(fields: [campanhaId], references: [id])
+    campanhaId  Int?
+    criadoEm    DateTime     @default(now())
+}
+
+model CampoInput {
+    id             Int           @id @default(autoincrement())
+    nome           String
+    tipo           String // ex: text, number, email
+    valor          String?
+    promoProduto   PromoProduto? @relation(fields: [promoProdutoId], references: [id])
+    promoProdutoId Int?
+}
+
+model BotaoPromo {
+    id             Int           @id @default(autoincrement())
+    texto          String
+    acao           String // ação que o botão vai executar, pode ser um link ou função
+    promoProduto   PromoProduto? @relation(fields: [promoProdutoId], references: [id])
+    promoProdutoId Int?
+}
+
+model Campanha {
+    id             Int           @id @default(autoincrement())
+    titulo         String
+    descricao      String
+    texto          String
+    callToAction   String
+    listaTopicos   ListaTopico[]
+    promoProduto   PromoProduto? @relation(fields: [promoProdutoId], references: [id])
+    promoProdutoId Int?
+    criadoEm       DateTime      @default(now())
+}
+
+model ListaTopico {
+    id         Int      @id @default(autoincrement())
+    titulo     String
+    descricao  String
+    texto      String
+    campanha   Campanha @relation(fields: [campanhaId], references: [id])
+    campanhaId Int
+}

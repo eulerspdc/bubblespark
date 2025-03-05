@@ -85,17 +85,17 @@ export default function FunnelDetail() {
           <EditableField label="Título" value={funnel.title} onSave={(value) => handleFieldUpdate("title", value)} />
           <EditableField
             label="Descrição"
-            value={funnel.description}
+            value={funnel.description  ?? ""}
             onSave={(value) => handleFieldUpdate("description", value)}
           />
           <EditableField
             label="URL do Vídeo"
-            value={funnel.videoUrl}
+            value={funnel.videoUrl  ?? ""}
             onSave={(value) => handleFieldUpdate("videoUrl", value)}
           />
           <EditableField
             label="Número de Leads"
-            value={funnel.leadsCount}
+            value={funnel.leadsCount  ?? ""}
             onSave={(value) => handleFieldUpdate("leadsCount", Number(value))}
             type="number"
           />
@@ -114,13 +114,13 @@ export default function FunnelDetail() {
           </div>
           <EditableField
             label="Expira em"
-            value={funnel.expiraEm}
+            value={funnel.expiraEm  ?? ""}
             onSave={(value) => handleFieldUpdate("expiraEm", value)}
             type="date"
           />
           <EditableField
             label="Dias no ar"
-            value={funnel.diasNoAr}
+            value={funnel.diasNoAr  ?? ""}
             onSave={(value) => handleFieldUpdate("diasNoAr", Number(value))}
             type="number"
           />

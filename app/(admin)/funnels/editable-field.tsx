@@ -37,7 +37,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({ value, onSave, typ
         <Input
           ref={inputRef}
           type={type}
-          value={editedValue}
+          value={editedValue ?? ""}
           onChange={(e) => setEditedValue(e.target.value)}
           className="w-full"
         />

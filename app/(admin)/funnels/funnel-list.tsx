@@ -66,11 +66,11 @@ const FunnelItem: React.FC<{
   funnel: FunnelCampaign;
   onToggleActive: () => void;
 }> = ({ funnel, onToggleActive }) => (
-  <Card className="mb-4 border-gray-200">
+  <Card className="mb-4 border-gray-200 rounded-sm shadow-sm">
     <CardContent className="flex flex-col items-start justify-between p-4 sm:flex-row sm:items-center">
       <div className="w-full flex-grow sm:w-auto">
         <div className="mb-2 flex flex-col justify-between sm:mb-0 sm:flex-row sm:items-center">
-          <Link href={`/funnels/${funnel.slug}/details`} className="block w-full">
+          <Link href={`/funnels/${funnel.slug}/edit`} className="block w-full">
             <div className="mb-2 flex items-center space-x-2 sm:mb-0   ">
               <h3 className="text-lg font-semibold capitalize">
                 {funnel.funnelName}
@@ -178,7 +178,12 @@ export const FunnelList: React.FC<FunnelListProps> = ({ funnels }) => {
 
   return (
     <div className="container ml-auto mr-auto mt-4 lg:max-w-full">
+      <div className="flex justify-between items-center py-4">
       <h1 className="mb-4 text-2xl font-bold">Lista de Funis</h1>
+      <Link href="/funnels/create">
+        <Button variant="default">Novo Funil</Button>
+      </Link>
+      </div>
       {mounted &&
         funnels.map((funnel: FunnelCampaign) => (
           <FunnelItem
